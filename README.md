@@ -86,8 +86,8 @@ tags = ["category", "service-type"]
 [stack.config]
 server = "TARGET_SERVER"
 auto_update = true
-git_account = "brumi1024"
-repo = "brumi1024/komodo-app-stacks"
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
 branch = "main"
 file_paths = ["services/my-stack/docker-compose.yaml"]
 
