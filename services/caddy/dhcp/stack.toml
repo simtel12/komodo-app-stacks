@@ -19,6 +19,8 @@ file_paths = [
 config_files = [
   { path = "dhcp/config/Caddyfile", requires = "Redeploy" }
 ]
+registry_provider = "ghcr.io"
+registry_account = "simtel12"
 environment = """
 # Caddy instance identifier for data/config directories
 CADDY_INSTANCE=dhcp
