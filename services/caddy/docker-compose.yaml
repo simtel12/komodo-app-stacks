@@ -39,3 +39,7 @@ services:
     restart: unless-stopped
     networks:
       - container_bridge
+
+networks:
+  container_bridge:
+    external: true
