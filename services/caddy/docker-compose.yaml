@@ -24,6 +24,7 @@ services:
       - ./${CADDY_INSTANCE:-caddy}/config/Caddyfile:/etc/caddy/Caddyfile:ro
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/data:/data
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/config:/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file:
       - .env
     labels:
@@ -36,3 +37,5 @@ services:
     healthcheck:
       test: ["CMD", "caddy", "version"]
     restart: unless-stopped
+    networks:
+      - container_bridge
