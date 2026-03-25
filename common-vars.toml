@@ -1,7 +1,7 @@
 [[variable]]
 name = "TZ"
 description = "Timezone"
-value = "Europe/Budapest"
+value = "America/Los_Angeles"
 is_secret = false
 
 [[variable]]
