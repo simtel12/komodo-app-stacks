@@ -1,0 +1,7 @@
+# Placeholder Caddyfile for truenas_scale
+# Add your reverse proxy rules here
+
+# Example format:
+# truenas-scale.lan {
+#     reverse_proxy <backend>:<port>
+# }

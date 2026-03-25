@@ -1,0 +1,7 @@
+# Placeholder Caddyfile for dhcp
+# Add your reverse proxy rules here
+
+# Example format:
+# dhcp.lan {
+#     reverse_proxy <backend>:<port>
+# }

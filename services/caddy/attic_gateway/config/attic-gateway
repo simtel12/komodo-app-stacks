@@ -1,0 +1,7 @@
+# Placeholder Caddyfile for attic_gateway
+# Add your reverse proxy rules here
+
+# Example format:
+# attic-gateway.lan {
+#     reverse_proxy <backend>:<port>
+# }

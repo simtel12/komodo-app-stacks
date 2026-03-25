@@ -1,0 +1,7 @@
+# Placeholder Caddyfile for blade_2016
+# Add your reverse proxy rules here
+
+# Example format:
+# blade-2016.lan {
+#     reverse_proxy <backend>:<port>
+# }

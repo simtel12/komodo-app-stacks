@@ -1,0 +1,7 @@
+# Placeholder Caddyfile for pi_rack_1
+# Add your reverse proxy rules here
+
+# Example format:
+# pi-rack-1.lan {
+#     reverse_proxy <backend>:<port>
+# }

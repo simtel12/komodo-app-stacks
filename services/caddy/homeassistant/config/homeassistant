@@ -1,0 +1,7 @@
+# Placeholder Caddyfile for homeassistant
+# Add your reverse proxy rules here
+
+# Example format:
+# homeassistant.lan {
+#     reverse_proxy <backend>:<port>
+# }

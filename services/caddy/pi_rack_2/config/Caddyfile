@@ -1,0 +1,6 @@
+{
+        email optikflux@gmail.com
+        acme_ca https://tinyca.lan:9001/acme/acme/directory
+}
+
+import ./HostCaddyfile

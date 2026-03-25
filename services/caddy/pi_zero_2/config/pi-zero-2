@@ -1,0 +1,7 @@
+# Placeholder Caddyfile for pi_zero_2
+# Add your reverse proxy rules here
+
+# Example format:
+# pi-zero-2.lan {
+#     reverse_proxy <backend>:<port>
+# }
