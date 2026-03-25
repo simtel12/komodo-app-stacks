@@ -1,4 +1,22 @@
 [[variable]]
+name = "OP__KOMODO__COMMON__ADMIN_DOMAIN"
+description = "Domain of machine running Komodo Admin"
+value = "blade-2018.lan"
+is_secret = false
+
+[[variable]]
+name = "OP__KOMODO__COMMON__TAILNET"
+description = "Top-level domain of network"
+value = "lan"
+is_secret = false
+
+[[variable]]
+name = "OP__KOMODO__COMMON__DOMAIN"
+description = "Root Domain of network"
+value = "lan"
+is_secret = false
+
+[[variable]]
 name = "TZ"
 description = "Timezone"
 value = "America/Los_Angeles"
