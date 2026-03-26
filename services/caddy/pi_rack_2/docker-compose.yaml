@@ -7,10 +7,9 @@ services:
       - .env
     volumes:
       - ./${CADDY_INSTANCE:-caddy}/config/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./${CADDY_INSTANCE:-caddy}/config/data/tesla.pem:/srv/.well-known/appspecific/com.tesla.3p.public-key.pem:ro
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/data:/data
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/config:/config
     labels:
-      - homepage.name=Caddy Home
-      - homepage.description=Home Reverse Proxy
+      - homepage.name=Caddy Pi-Rack-2
+      - homepage.description=Pi-Rack-2 Reverse Proxy
       - homepage.widget.url=http://${HOST_NAME}.${TAILNET}:${PORT_CADDY_ADMIN}

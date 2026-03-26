@@ -9,7 +9,6 @@ services:
       - ./${CADDY_INSTANCE:-caddy}/config/Caddyfile:/etc/caddy/Caddyfile:ro
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/data:/data
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/config:/config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       - homepage.name=Caddy Pi-Rack-4
       - homepage.description=Pi-Rack-4 Reverse Proxy
