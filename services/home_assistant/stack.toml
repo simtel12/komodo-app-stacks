@@ -12,7 +12,7 @@ repo = "simtel12/komodo-app-stacks"
 branch = "main"
 reclone = false
 file_paths = [
-    "services/homeassistant/docker-compose.yaml",
+    "services/home_assistant/docker-compose.yaml",
 ]
 config_files = []
 environment = """
