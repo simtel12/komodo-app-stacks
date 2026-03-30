@@ -1,7 +1,7 @@
 services:
   homeassistant:
     container_name: home_assistant
-    image: "ghcr.io/home-assistant/home-assistant:${HOMEASSISTANT_TAG:-stable}"
+    image: "ghcr.io/home-assistant/home-assistant:${HOMEASSISTANT_TAG:-latest}"
     volumes:
       - /mnt/dietpi_userdata/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
