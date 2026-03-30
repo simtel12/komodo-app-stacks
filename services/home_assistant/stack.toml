@@ -15,6 +15,8 @@ file_paths = [
     "services/home_assistant/docker-compose.yaml",
 ]
 config_files = []
+registry_provider = "ghcr.io"
+registry_account = "simtel12"
 environment = """
 # User and group configuration
 TZ=[[TZ]]
