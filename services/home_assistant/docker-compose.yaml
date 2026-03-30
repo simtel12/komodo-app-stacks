@@ -1,0 +1,27 @@
+services:
+  homeassistant:
+    container_name: home_assistant
+    image: "ghcr.io/home-assistant/home-assistant:${HOMEASSISTANT_TAG:-stable}"
+    volumes:
+      - /mnt/dietpi_userdata/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    # networks:
+    #   - container_bridge
+    # ports:
+    #   - "8123:8123"
+    network_mode: host
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    labels:
+      caddy: homeassistant.lan
+      caddy_ingress_network: container_bridge
+      caddy.reverse_proxy: host.docker.internal:8123
+    environment:
+      - TZ=America/Los_Angeles
+
+networks:
+  container_bridge:
+    external: true
