@@ -3,7 +3,7 @@ name = "actualbudget"
 tags = ["finance", "personal", "budgeting"]
 
 [stack.config]
-server = "docker"
+server = "pi_rack_1"
 poll_for_updates = true
 auto_update = true
 git_account = "simtel12"
