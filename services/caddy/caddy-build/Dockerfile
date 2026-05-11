@@ -4,17 +4,19 @@ ARG CERT_SERVER=https://10.0.0.30:9001
 
 FROM caddy:${CADDY_VERSION}-builder-alpine AS builder
 
-RUN xcaddy build \
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    xcaddy build \
     --with github.com/caddy-dns/rfc2136 \
     --with github.com/lucaslorentz/caddy-docker-proxy/v2
 
-FROM caddy:${CADDY_VERSION} AS caddy
+FROM caddy:${CADDY_VERSION}-alpine
 ARG CA_FINGERPRINT
 ARG CERT_SERVER
-
-WORKDIR /
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 
 COPY trustca.crt /usr/local/share/ca-certificates/tinyca.lan.crt
 RUN cat /usr/local/share/ca-certificates/tinyca.lan.crt >> /etc/ssl/certs/ca-certificates.crt
+
+CMD ["caddy", "docker-proxy"]
