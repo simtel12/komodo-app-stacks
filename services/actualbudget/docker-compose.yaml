@@ -14,6 +14,9 @@ services:
     environment:
       - TZ=${TZ}
     labels:
+      - caddy: actual.${DOMAIN}:443
+      - caddy_ingress_network: container_bridge
+      - caddy.reverse_proxy: "{{upstreams 5006}}"
       - homepage.group=Personal Apps
       - homepage.name=Actual Budget
       - homepage.icon=actual-budget.svg
