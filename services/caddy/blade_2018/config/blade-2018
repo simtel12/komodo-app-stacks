@@ -5,3 +5,7 @@
 # blade-2018.lan {
 #     reverse_proxy <backend>:<port>
 # }
+
+openai.blade-2018.lan {
+    reverse_proxy 10.0.0.127:8080
+}
