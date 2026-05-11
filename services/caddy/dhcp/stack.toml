@@ -17,7 +17,8 @@ file_paths = [
     "dhcp/docker-compose.yaml",
 ]
 config_files = [
-  { path = "dhcp/config/Caddyfile", requires = "Redeploy" }
+  { path = "dhcp/config/Caddyfile", requires = "Redeploy" },
+  { path = "dhcp/config/HostCaddyfile", requires = "Redeploy" }
 ]
 registry_provider = "ghcr.io"
 registry_account = "simtel12"
