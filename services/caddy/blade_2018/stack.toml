@@ -17,7 +17,8 @@ file_paths = [
     "blade_2018/docker-compose.yaml",
 ]
 config_files = [
-  { path = "blade_2018/config/Caddyfile", requires = "Redeploy" }
+  { path = "blade_2018/config/Caddyfile", requires = "Redeploy" },
+  { path = "blade_2018/config/HostCaddyfile", requires = "Redeploy" }
 ]
 registry_provider = "ghcr.io"
 registry_account = "simtel12"

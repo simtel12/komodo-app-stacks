@@ -17,7 +17,8 @@ file_paths = [
     "pi_zero_1/docker-compose.yaml",
 ]
 config_files = [
-  { path = "pi_zero_1/config/Caddyfile", requires = "Redeploy" }
+  { path = "pi_zero_1/config/Caddyfile", requires = "Redeploy" },
+  { path = "pi_zero_1/config/HostCaddyfile", requires = "Redeploy" }
 ]
 registry_provider = "ghcr.io"
 registry_account = "simtel12"

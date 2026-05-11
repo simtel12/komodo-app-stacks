@@ -3,10 +3,12 @@ name: "caddy-truenas_scale"
 services:
   caddy:
     container_name: caddy-truenas_scale
+    environment:
+      - CADDY_DOCKER_CADDYFILE_PATH=/etc/caddy/Caddyfile
     env_file:
       - .env
     volumes:
-      - ./${CADDY_INSTANCE:-caddy}/config/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./${CADDY_INSTANCE:-caddy}/config:/etc/caddy:ro
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/data:/data
       - ${CONFIG_DIR}/${CADDY_INSTANCE:-caddy}/config:/config
     labels:
