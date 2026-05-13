@@ -14,13 +14,13 @@ services:
     environment:
       - TZ=${TZ}
     labels:
-      - caddy=actual.${DOMAIN}:443
+      - caddy=actual.lan actual.pi-rack-1.lan
       - caddy_ingress_network=container_bridge
       - caddy.reverse_proxy="{{upstreams 5006}}"
       - homepage.group=Personal Apps
       - homepage.name=Actual Budget
       - homepage.icon=actual-budget.svg
-      - homepage.href=https://actual.${DOMAIN}
+      - homepage.href=https://actual.lan
       - homepage.description=Personal Finance
     healthcheck:
       # Enable health check for the instance
