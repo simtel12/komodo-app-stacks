@@ -10,6 +10,7 @@ git_account = "simtel12"
 repo = "simtel12/komodo-app-stacks"
 run_directory="services/actualbudget"
 file_paths = [
+  "../../common-vars.toml",
   "docker-compose.yaml"
 ]
 
