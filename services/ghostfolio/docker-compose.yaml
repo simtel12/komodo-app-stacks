@@ -33,7 +33,7 @@ services:
       - homepage.href=https://ghostfolio.lan
       - homepage.description=Portfolio Management
     depends_on:
-      postgres:
+      postgresql:
         condition: service_healthy
       redis:
         condition: service_healthy
