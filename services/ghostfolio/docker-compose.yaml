@@ -2,10 +2,6 @@ name: "ghostfolio"
 
 services:
   ghostfolio:
-    env_file:
-      - ../.env
-
-  ghostfolio:
     container_name: ghostfolio
     image: docker.io/ghostfolio/ghostfolio:${GHOSTFOLIO_TAG:-latest}
     init: true
