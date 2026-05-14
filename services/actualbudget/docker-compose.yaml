@@ -13,6 +13,11 @@ services:
       - /etc/localtime:/etc/localtime:ro
     environment:
       - TZ=${TZ}
+      - ACTUAL_OPENID_DISCOVERY_URL=https://auth.lan/application/o/actual-budget/
+      - ACTUAL_OPENID_CLIENT_ID=${ACTUAL_OPENID_CLIENT_ID}
+      - ACTUAL_OPENID_CLIENT_SECRET=${ACTUAL_OPENID_CLIENT_SECRET}
+      - ACTUAL_OPENID_SERVER_HOSTNAME=https://actual.lan
+      - ACTUAL_OPENID_AUTH_METHOD=oauth2
     labels:
       - caddy=actual.lan:443 actual.pi-rack-1.lan
       - caddy_ingress_network=container_bridge
