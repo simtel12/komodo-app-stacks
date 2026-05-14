@@ -1,0 +1,42 @@
+[[stack]]
+name = "ghostfolio"
+tags = ["finance", "personal", "budgeting"]
+
+[stack.config]
+server = "pi_rack_1"
+poll_for_updates = true
+auto_update = true
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+run_directory="services/ghostfolio"
+file_paths = [
+  "docker-compose.yaml"
+]
+
+environment = """
+# Configuration directory
+CONFIG_DIR=[[CONFIG_DIR]]
+
+# Application configuration
+GHOSTFOLIO_TAG=latest
+TZ=[[TZ]]
+
+# Logging configuration
+LOGGING_DRIVER=[[LOGGING_DRIVER]]
+
+# Network and domain configuration
+DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
+PORT_ACTUAL_HTTP=[[PORT_ACTUAL_HTTP]]
+
+# OPENID/OIDC
+OIDC_CLIENT_ID=[[OP__KOMODO__GHOSTFOLIO__AUTHENTIK_CLIENT_ID]]
+OIDC_CLIENT_SECRET=[[OP__KOMODO_GHOSTFOLIO__AUTHENTIK_CLIENT_SECRET]]
+
+# VARIOUS
+POSTGRES_USER=[[OP__KOMODO__AUTHENTIK__AUTHENTIK_PG_USER]]
+POSTGRES_PASSWORD=[[OP__KOMODO__AUTHENTIK__AUTHENTIK_PG_PASS]]
+POSTGRES_DB=ghostfolio
+ACCESS_TOKEN_SALT=<INSERT_RANDOM_STRING>
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?connect_timeout=300
+JWT_SECRET_KEY=<INSERT_RANDOM_STRING>
+"""

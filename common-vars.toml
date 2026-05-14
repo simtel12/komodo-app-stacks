@@ -102,6 +102,12 @@ value = "5006"
 is_secret = false
 
 [[variable]]
+name = "PORT_GHOSTFOLIO_HTTP"
+description = "Ghostfolio HTTP port"
+value = "3333"
+is_secret = false
+
+[[variable]]
 name = "PORT_DASH_HTTP"
 description = "Dashboard HTTP port"
 value = "3000"
