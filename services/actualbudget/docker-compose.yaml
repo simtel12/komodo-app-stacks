@@ -14,7 +14,7 @@ services:
     environment:
       - TZ=${TZ}
     labels:
-      - caddy=actual.lan actual.pi-rack-1.lan
+      - caddy=actual.lan:443 actual.pi-rack-1.lan
       - caddy_ingress_network=container_bridge
       - caddy.reverse_proxy="{{upstreams 5006}}"
       - homepage.group=Personal Apps
