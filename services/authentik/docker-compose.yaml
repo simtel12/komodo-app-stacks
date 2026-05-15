@@ -7,12 +7,6 @@ services:
     command: server
     networks:
       - container_bridge
-    environment:
-      AUTHENTIK_POSTGRESQL__HOST: ${HOST_POSTGRES}
-      AUTHENTIK_POSTGRESQL__PORT: ${PORT_POSTGRES_TCP}
-      AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
-      AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS}
     volumes:
       - ${CONFIG_DIR}/authentik/media:/media
       - ${CONFIG_DIR}/authentik/custom-templates:/templates
@@ -21,35 +15,25 @@ services:
       - caddy_ingress_network=container_bridge
       - caddy.reverse_proxy_1="{{upstreams http 9000}}"
       - caddy.reverse_proxy_2="{{upstreams https 9443}}"
-      - homepage.group=Administration
-      - homepage.name=Authentik
-      - homepage.icon=authentik.svg
-      - homepage.href=https://auth.${DOMAIN}
-      - homepage.description=Authentication Service
-      - homepage.widget.type=authentik
-      - homepage.widget.url=https://auth.${DOMAIN}
-      - homepage.widget.key=${AUTHENTIK_HOMEPAGE_TOKEN}
+      # - homepage.group=Administration
+      # - homepage.name=Authentik
+      # - homepage.icon=authentik.svg
+      # - homepage.href=https://auth.${DOMAIN}
+      # - homepage.description=Authentication Service
+      # - homepage.widget.type=authentik
+      # - homepage.widget.url=https://auth.${DOMAIN}
+      # - homepage.widget.key=${AUTHENTIK_HOMEPAGE_TOKEN}
     env_file:
       - .env
     ports:
-      - "${PORT_AUTHENTIK_HTTP:-9000}:9000"
-      - "${PORT_AUTHENTIK_HTTPS:-9443}:9443"
-    depends_on:
-      postgresql:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - ${PORT_AUTHENTIK_HTTP:-9000}:9000
+      - ${PORT_AUTHENTIK_HTTPS:-9443}:9443
   worker:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2026.2.3}
     networks:
       - container_bridge
     restart: unless-stopped
     command: worker
-    environment:
-      AUTHENTIK_POSTGRESQL__HOST: ${HOST_POSTGRES}
-      AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
-      AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS}
     # `user: root` and the docker socket volume are optional.
     # See more for the docker socket integration here:
     # https://goauthentik.io/docs/outposts/integrations/docker
@@ -64,17 +48,6 @@ services:
       - ${CONFIG_DIR}/authentik/custom-templates:/templates
     env_file:
       - .env
-    depends_on:
-      postgresql:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-
-volumes:
-  authentik-database:
-    driver: local
-  authentik-redis:
-    driver: local
 
 networks:
   container_bridge:
