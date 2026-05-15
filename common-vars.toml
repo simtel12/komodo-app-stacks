@@ -220,3 +220,27 @@ name = "PORT_SOCKY_PROXY"
 description = "Socky proxy port"
 value = "12375"
 is_secret = false
+
+[[variable]]
+name = "PORT_POSTGRES_TCP"
+description = "PostgreSQL port"
+value = "5432"
+is_secret = false
+
+[[variable]]
+name = "PORT_REDIS"
+description = "Redis port"
+value = "6379"
+is_secret = false
+
+[[variable]]
+name = "HOST_POSTGRES"
+description = "PostgreSQL host"
+value = "postgres.lan"
+is_secret = false
+
+[[variable]]
+name = "HOST_REDIS"
+description = "Redis host"
+value = "redis.lan"
+is_secret = false

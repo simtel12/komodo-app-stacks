@@ -3,42 +3,66 @@
   "extends": [
     "config:base"
   ],
-  "schedule": ["before 6am"],
+  "schedule": [
+    "before 6am"
+  ],
   "timezone": "America/New_York",
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "automerge": false,
   "prConcurrentLimit": 5,
   "packageRules": [
     {
       "description": "Auto-merge patch updates for Docker images",
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["patch"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
       "automerge": true
     },
     {
       "description": "Group Linux Server Docker images",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["^linuxserver/", "^lscr.io/linuxserver/"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackagePatterns": [
+        "^linuxserver/",
+        "^lscr.io/linuxserver/"
+      ],
       "groupName": "LinuxServer.io images"
     },
     {
       "description": "Group Prometheus stack images",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["^prom/", "^grafana/"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackagePatterns": [
+        "^prom/",
+        "^grafana/"
+      ],
       "groupName": "Prometheus monitoring stack"
     },
     {
       "description": "Group Immich stack images",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["^ghcr.io/immich-app/"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackagePatterns": [
+        "^ghcr.io/immich-app/"
+      ],
       "groupName": "Immich stack"
     },
     {
       "description": "Group media automation stack",
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
         "lscr.io/linuxserver/prowlarr",
-        "lscr.io/linuxserver/overseerr", 
+        "lscr.io/linuxserver/overseerr",
         "lscr.io/linuxserver/qbittorrent",
         "lscr.io/linuxserver/radarr",
         "lscr.io/linuxserver/sonarr"
@@ -47,7 +71,9 @@
     },
     {
       "description": "Group paperless stack images",
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
         "ghcr.io/paperless-ngx/paperless-ngx",
         "docker.io/library/postgres",
@@ -57,17 +83,39 @@
     },
     {
       "description": "Group Authentik stack images",
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
-        "ghcr.io/goauthentik/server",
-        "docker.io/library/postgres",
-        "docker.io/library/redis"
+        "ghcr.io/goauthentik/server"
       ],
       "groupName": "Authentik authentication stack"
     },
     {
+      "description": "Group Postgres images",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "docker.io/library/postgres"
+      ],
+      "groupName": "PostgreSQL stack"
+    },
+    {
+      "description": "Group Redis images",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "docker.io/library/redis"
+      ],
+      "groupName": "Redis stack"
+    },
+    {
       "description": "Group monitoring stack images",
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
         "henrygd/beszel",
         "henrygd/beszel-agent"
@@ -76,13 +124,19 @@
     },
     {
       "description": "Group homepage and dashboard images",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["^ghcr.io/gethomepage/"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackagePatterns": [
+        "^ghcr.io/gethomepage/"
+      ],
       "groupName": "Homepage dashboard"
     },
     {
       "description": "Group VPN sync tools",
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
         "ghcr.io/lovelaze/nebula-sync"
       ],
@@ -90,14 +144,28 @@
     },
     {
       "description": "Group security proxy tools",
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
         "ghcr.io/tecnativa/docker-socket-proxy"
       ],
       "groupName": "Security proxy tools"
+    },
+    {
+      "description": "Group Ghostfolio images",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "docker.io/ghostfolio/ghostfolio"
+      ],
+      "groupName": "Ghostfolio stack"
     }
   ],
   "docker": {
-    "fileMatch": ["(^|/)docker-compose.*\\.ya?ml$"]
+    "fileMatch": [
+      "(^|/)docker-compose.*\\.ya?ml$"
+    ]
   }
 }

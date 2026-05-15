@@ -1,0 +1,32 @@
+[[stack]]
+name = "redis"
+tags = ["utility", "database"]
+
+[stack.config]
+server = "pi_rack_4"
+poll_for_updates = true
+auto_update = true
+destroy_before_deploy = false
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+branch = "main"
+reclone = false
+run_directory = "services/redis"
+file_paths = [
+    "docker-compose.yaml",
+]
+
+environment = """
+# Configuration directory
+CONFIG_DIR=[[CONFIG_DIR]]
+
+# Network and domain configuration
+DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
+
+# Port configuration
+PORT_REDIS=[[PORT_REDIS_TCP]]
+
+# Application configuration
+REDIS_IMAGE=docker.io/library/redis
+REDIS_TAG=alpine
+"""

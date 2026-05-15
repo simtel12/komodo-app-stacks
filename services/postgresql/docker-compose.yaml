@@ -1,0 +1,40 @@
+name: "postgres"
+
+services:
+  postgres:
+    image: ${POSTGRESQL_IMAGE:-docker.io/library/postgres}:${POSTGRESQL_TAG:-18-alpine}
+    restart: unless-stopped
+    networks:
+      - container_bridge
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+      - ${CONFIG_DIR}/postgresql:/var/lib/postgresql
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - ./config/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+      - ./config/pg_ident.conf:/etc/postgresql/pg_ident.conf:ro
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRESQL_PASS:?database password required}"
+      POSTGRES_USER: "${POSTGRESQL_USER:-postgres}"
+      POSTGRES_DB: "${POSTGRESQL_DB:-pgdb}"
+    env_file:
+      - .env
+    ports:
+      - "${PORT_POSTGRES}:5432"
+    labels:
+      - caddy_ingress_network=container_bridge
+    deploy:
+      resources:
+        limits:
+          memory: 140M
+        reservations:
+          memory: 64M
+
+networks:
+  container_bridge:
+    external: true

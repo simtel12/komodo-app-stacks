@@ -1,0 +1,37 @@
+[[stack]]
+name = "postgresql"
+tags = ["utility", "database"]
+
+[stack.config]
+server = "pi_rack_4"
+poll_for_updates = true
+auto_update = true
+destroy_before_deploy = false
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+branch = "main"
+reclone = false
+run_directory = "services/postgresql"
+file_paths = [
+    "docker-compose.yaml",
+]
+
+environment = """
+# Configuration directory
+CONFIG_DIR=[[CONFIG_DIR]]
+
+# Network and domain configuration
+DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
+
+# Port configuration
+PORT_POSTGRES=[[PORT_POSTGRES_TCP]]
+
+# Application configuration
+POSTGRESQL_IMAGE=docker.io/library/postgres
+POSTGRESQL_TAG=18-alpine
+
+# Database configuration
+POSTGRESQL_DB=pgdb
+POSTGRESQL_USER=[[OP__KOMODO__POSTGRESQL__POSTGRESQL_USER]]
+POSTGRESQL_PASS=[[OP__KOMODO__POSTGRESQL__POSTGRESQL_PASS]]
+"""
