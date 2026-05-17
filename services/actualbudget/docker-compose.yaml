@@ -11,6 +11,7 @@ services:
     volumes:
       - ${CONFIG_DIR}/actual:/data
       - /etc/localtime:/etc/localtime:ro
+      - ../../common/certs/trustca.crt:/certs/trustca.crt:ro
     environment:
       - TZ=${TZ}
       - ACTUAL_OPENID_DISCOVERY_URL=https://auth.lan/application/o/actual-budget/
