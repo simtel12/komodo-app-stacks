@@ -16,6 +16,7 @@ services:
     volumes:
       - ${CONFIG_DIR}/ghostfolio:/data
       - /etc/localtime:/etc/localtime:ro
+      - ../../common/certs/trustca.crt:/certs/trustca.crt:ro
     env_file:
       - .env
     labels:
