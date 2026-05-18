@@ -3,12 +3,12 @@ name: "redis"
 services:
   redis:
     image: ${REDIS_IMAGE:-docker.io/library/redis}:${REDIS_TAG:-alpine}
-    command: --save 60 1 --loglevel warning
+    command: redis-server --save 60 1 --loglevel warning --requirepass $${REDIS_PASSWORD}
     networks:
       - container_bridge
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      test: ["CMD-SHELL", "redis-cli -a $${REDIS_PASSWORD} ping | grep PONG"]
       start_period: 20s
       interval: 30s
       retries: 5
@@ -16,7 +16,7 @@ services:
     volumes:
       - ${CONFIG_DIR}/redis/data:/data
     ports:
-      - "${PORT_REDIS_TCP}:6379"
+      - "${PORT_REDIS}:6379"
     env_file:
       - .env
     labels:

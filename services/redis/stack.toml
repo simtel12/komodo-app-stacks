@@ -26,6 +26,9 @@ DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
 # Port configuration
 PORT_REDIS=[[PORT_REDIS_TCP]]
 
+# Redis password
+REDIS_PASSWORD=[[OP__KOMODO__REDIS__REDIS_PASSWORD]]
+
 # Application configuration
 REDIS_IMAGE=docker.io/library/redis
 REDIS_TAG=alpine
