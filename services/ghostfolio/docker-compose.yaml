@@ -16,14 +16,8 @@ services:
     volumes:
       - ${CONFIG_DIR}/ghostfolio:/data
       - /etc/localtime:/etc/localtime:ro
-    environment:
-      - TZ=${TZ}
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql:5432/${POSTGRES_DB}?connect_timeout=300
-      - ROOT_URL=https://ghostfolio.lan
-      - ENABLE_FEATURE_AUTH_OIDC=true
-      - OIDC_ISSUER=https://auth.lan/application/o/ghostfolio/
-      - OIDC_CLIENT_ID=${OIDC_CLIENT_ID}
-      - OIDC_CLIENT_SECRET=${OIDC_CLIENT_SECRET}
+    env_file:
+      - .env
     labels:
       - caddy=ghostfolio.lan:443 ghostfolio.pi-rack-1.lan
       - caddy_ingress_network=container_bridge

@@ -236,11 +236,11 @@ is_secret = false
 [[variable]]
 name = "HOST_POSTGRES"
 description = "PostgreSQL host"
-value = "postgres.lan"
+value = "10.0.0.204"
 is_secret = false
 
 [[variable]]
 name = "HOST_REDIS"
 description = "Redis host"
-value = "redis.lan"
+value = "10.0.0.204"
 is_secret = false
