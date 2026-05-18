@@ -228,7 +228,7 @@ value = "5432"
 is_secret = false
 
 [[variable]]
-name = "PORT_REDIS"
+name = "PORT_REDIS_TCP"
 description = "Redis port"
 value = "6379"
 is_secret = false
