@@ -14,6 +14,15 @@ services:
       - ${CONFIG_DIR}/investbrain/storage:/var/app/storage
     networks:
       - container_bridge
+    labels:
+      - caddy=investbrain.lan:443 investbrain.pi-rack-1.lan
+      - caddy_ingress_network=container_bridge
+      - caddy.reverse_proxy="{{upstreams 80}}"
+      - homepage.group=Personal Apps
+      - homepage.name=InvestBrain
+      - homepage.icon=investbrain.svg
+      - homepage.href=https://investbrain.lan
+      - homepage.description=Portfolio Management
 
 networks:
   container_bridge:
