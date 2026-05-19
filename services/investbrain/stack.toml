@@ -1,0 +1,63 @@
+[[stack]]
+name = "investbrain"
+tags = ["finance", "personal", "budgeting"]
+
+[stack.config]
+server = "pi_rack_1"
+poll_for_updates = true
+auto_update = true
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+run_directory="services/investbrain"
+file_paths = [
+  "docker-compose.yaml"
+]
+
+environment = """
+# Configuration directory
+CONFIG_DIR=[[CONFIG_DIR]]
+
+# Application configuration
+INVESTBRAIN_TAG=latest
+TZ=[[TZ]]
+
+# Logging configuration
+LOGGING_DRIVER=[[LOGGING_DRIVER]]
+
+# Network and domain configuration
+DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
+
+# VARIOUS
+ACCESS_TOKEN_SALT=[[OP__KOMODO__INVESTBRAIN__ACCESS_TOKEN_SALT]]
+JWT_SECRET_KEY=[[OP__KOMODO__INVESTBRAIN__JWT_SECRET_KEY]]
+
+# OPENID/OIDC
+ENABLE_FEATURE_AUTH_OIDC=true
+OIDC_ISSUER=https://auth.lan/application/o/investbrain/
+OIDC_CLIENT_ID=[[OP__KOMODO__INVESTBRAIN__AUTHENTIK_CLIENT_ID]]
+OIDC_CLIENT_SECRET=[[OP__KOMODO_INVESTBRAIN__AUTHENTIK_CLIENT_SECRET]]
+
+# Custom CA certificate for connecting to Authentik
+NODE_EXTRA_CA_CERTS=/certs/trustca.crt
+
+APP_KEY=[[OP__KOMODO__INVESTBRAIN__APP_KEY]]
+APP_URL: "https://investbrain.lan"
+ASSET_URL: "https://investbrain.lan"
+TRUSTED_PROXIES=*
+FORCE_HTTPS=true
+APP_PORT: [[PORT_INVESTBRAIN_HTTP]]
+DB_CONNECTION: pgsql
+DB_HOST: [[HOST_POSTGRES]]
+DB_PORT: [[PORT_POSTGRES_TCP]]
+DB_DATABASE: investbraindb
+DB_USERNAME: [[OP__KOMODO__POSTGRESQL__POSTGRESQL_USER]]
+DB_PASSWORD: [[OP__KOMODO__POSTGRESQL__POSTGRESQL_PASS]]
+SESSION_DRIVER: redis
+QUEUE_CONNECTION: redis
+CACHE_STORE: redis
+
+# REDIS
+REDIS_HOST=[[HOST_REDIS]]
+REDIS_PORT=[[PORT_REDIS_TCP]]
+
+"""

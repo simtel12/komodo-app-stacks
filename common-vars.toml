@@ -244,3 +244,9 @@ name = "HOST_REDIS"
 description = "Redis host"
 value = "10.0.0.204"
 is_secret = false
+
+[[variable]]
+name = "PORT_INVESTBRAIN_HTTP"
+description = "Investbrain HTTP port"
+value = "3334"
+is_secret = false

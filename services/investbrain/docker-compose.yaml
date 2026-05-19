@@ -1,0 +1,20 @@
+services:
+  investbrain:
+    container_name: investbrain
+    image: investbrainapp/investbrain:${INVESTBRAIN_TAG:-latest}
+    restart: unless-stopped
+    tty: true
+    ports:
+      - ${APP_PORT}:80
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ../../common/certs/trustca.crt:/certs/trustca.crt:ro
+      - ${CONFIG_DIR}/investbrain/storage:/var/app/storage
+    networks:
+      - container_bridge
+
+networks:
+  container_bridge:
+    external: true
