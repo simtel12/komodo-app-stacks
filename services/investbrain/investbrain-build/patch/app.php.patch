@@ -1,0 +1,11 @@
+--- a/bootstrap/app.php
++++ b/bootstrap/app.php
+@@ -15,7 +15,8 @@
+         health: '/up',
+     )
+     ->withMiddleware(function (Middleware $middleware) {
+         $middleware->appendToGroup('web', LocalizationMiddleware::class);
++        $middleware->trustProxies(at: '*');
+     })
+     ->withExceptions(function (Exceptions $exceptions) {
+         //

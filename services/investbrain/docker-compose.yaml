@@ -1,7 +1,7 @@
 services:
   investbrain:
     container_name: investbrain
-    image: investbrainapp/investbrain:${INVESTBRAIN_TAG:-latest}
+    image: ghcr.io/simtel12/investbrain:latest
     restart: unless-stopped
     tty: true
     ports:
