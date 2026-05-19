@@ -16,6 +16,12 @@ services:
       - container_bridge
     labels:
       - caddy=investbrain.lan:443 investbrain.pi-rack-1.lan
+      - caddy.route.reverse_proxy=/outpost.goauthentik.io/* https://auth.lan:9000
+      - caddy.route.reverse_proxy.header_up Host {http.reverse_proxy.upstream.host}
+      - caddy.route.forward_auth=http://auth.lan:9000
+      - caddy.route.forward_auth.uri=/outpost.goauthentik.io/auth/caddy
+      - caddy.route.forward_auth.copy_headers=X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version authorization
+      - caddy.route.forward_auth.trusted_proxies=private_ranges
       - caddy_ingress_network=container_bridge
       - caddy.reverse_proxy="{{upstreams 80}}"
       - homepage.group=Personal Apps
