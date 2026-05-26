@@ -46,5 +46,5 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      o: "addr=${MEDIA_SMB_HOST},vers=3.0,uid=0,gid=0,iocharset=utf8,noperm"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},vers=3.0,uid=0,gid=0,iocharset=utf8"
       device: "//${MEDIA_SMB_HOST}/audiobooks"
