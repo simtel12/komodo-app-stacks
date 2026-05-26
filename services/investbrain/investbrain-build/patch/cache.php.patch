@@ -1,0 +1,12 @@
+--- a/config/cache.php
++++ b/config/cache.php
+@@ -118,6 +118,8 @@
+     |
+     */
+ 
+-    'serializable_classes' => false,
++    'serializable_classes' => [
++        \Illuminate\Support\Collection::class,
++    ],
+ 
+ ];
