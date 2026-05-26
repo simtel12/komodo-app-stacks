@@ -1,0 +1,35 @@
+[[stack]]
+name = "audiobookshelf"
+tags = ["books", "audio", "media"]
+
+[stack.config]
+server = "pi_rack_1"
+poll_for_updates = true
+auto_update = true
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+run_directory="services/audiobookshelf"
+file_paths = [
+  "docker-compose.yaml"
+]
+
+environment = """
+# Configuration directory
+CONFIG_DIR=[[CONFIG_DIR]]
+
+# Application configuration
+AUDIOBOOKSHELF_TAG=latest
+TZ=[[TZ]]
+
+# Logging configuration
+LOGGING_DRIVER=[[LOGGING_DRIVER]]
+
+# Network and domain configuration
+DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
+PORT_AUDIOBOOKSHELF_HTTP=[[PORT_AUDIOBOOKSHELF_HTTP]]
+
+MEDIA_SMB_HOST=[[TRUENAS_SMB_HOST]]
+
+# Custom CA certificate for connecting to Authentik
+NODE_EXTRA_CA_CERTS=/certs/trustca.crt
+"""

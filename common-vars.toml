@@ -250,3 +250,15 @@ name = "PORT_INVESTBRAIN_HTTP"
 description = "Investbrain HTTP port"
 value = "3334"
 is_secret = false
+
+[[variable]]
+name = "TRUENAS_SMB_HOST"
+description = "Host for SMB shares"
+value = "truenas.scale.lan"
+is_secret = false
+
+[[variable]]
+name = "PORT_AUDIOBOOKSHELF_HTTP"
+description = "Audiobookshelf HTTP port"
+value = "13378"
+is_secret = false

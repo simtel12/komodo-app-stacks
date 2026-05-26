@@ -1,0 +1,50 @@
+name: "audiobookshelf"
+
+services:
+  audiobookshelf:
+    container_name: audiobookshelf
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    logging:
+      driver: ${LOGGING_DRIVER:-local}
+    ports:
+      - ${PORT_AUDIOBOOKSHELF_HTTP}:80
+    volumes:
+      - audiobook_share:/audiobooks
+      - ${CONFIG_DIR}/audiobookshelf/config:/config
+      - ${CONFIG_DIR}/audiobookshelf/metadata:/config
+      - /etc/localtime:/etc/localtime:ro
+      - ../../common/certs/trustca.crt:/certs/trustca.crt:ro
+    env_file:
+      - .env
+    labels:
+      - caddy=audiobookshelf.lan:443 audiobookshelf.pi-rack-1.lan
+      - caddy_ingress_network=container_bridge
+      - caddy.encode=gzip zstd
+      - caddy.reverse_proxy="{{upstreams 80}}"
+      - homepage.group=Media
+      - homepage.name=Audiobookshelf
+      - homepage.icon=audiobookshelf.svg
+      - homepage.href=https://audiobookshelf.lan
+      - homepage.description=Audiobooks
+    healthcheck:
+      # Enable health check for the instance
+      test: wget --no-verbose --tries=1 --spider http://localhost || exit 1
+      interval: 5m
+      timeout: 5s
+      start_period: 30s
+      start_interval: 1s
+    restart: unless-stopped
+    networks:
+      - container_bridge
+
+networks:
+  container_bridge:
+    external: true
+
+volumes:
+  audiobook_share:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: "vers=3.0,uid=0,gid=0,iocharset=utf8"
+      device: "//${MEDIA_SMB_HOST}/audiobooks"
