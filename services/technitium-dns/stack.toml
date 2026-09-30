@@ -24,7 +24,7 @@ CONFIG_DIR=[[CONFIG_DIR]]
 DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
 
 # Application configuration
-TECHNITIUM_IMAGE=ghcr.io/goauthentik/server
+TECHNITIUM_IMAGE=technitium/dns-server
 TECHNITIUM_TAG=latest
 
 # ADMIN_PASSWORD
