@@ -1,0 +1,33 @@
+name: "technitium"
+
+services:
+  dns-server:
+    container_name: dns-server
+    hostname: dns-server
+    image: ${TECHNITIUM_IMAGE:-ghcr.io/goauthentik/server}:${TECHNITIUM_TAG:-2026.2.3}
+    restart: unless-stopped
+    # For DHCP deployments, use "host" network mode and remove all the port mappings, including the ports array by commenting them
+    # network_mode: "host"
+    networks:
+      - container_bridge
+    ports:
+      - "5380:5380/tcp" #DNS web console (HTTP)
+      - "53:53/udp" #DNS service
+      - "53:53/tcp" #DNS service
+    volumes:
+      - config:/etc/dns
+    labels:
+      - caddy=technitium.blade-2018.lan:443 dns-server.blade-2018.lan:443
+      - caddy_ingress_network=container_bridge
+      - caddy.reverse_proxy="{{upstreams 5380}}"
+    env_file:
+      - .env
+    sysctls:
+      - net.ipv4.ip_local_port_range=1024 65000
+
+volumes:
+    config:
+
+networks:
+  container_bridge:
+    external: true

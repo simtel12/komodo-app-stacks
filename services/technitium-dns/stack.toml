@@ -1,0 +1,38 @@
+[[stack]]
+name = "technitium"
+tags = ["dns", "blade_2018"]
+
+[stack.config]
+server = "blade_2018"
+poll_for_updates = true
+auto_update = true
+destroy_before_deploy = false
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+branch = "main"
+reclone = false
+run_directory = "services/technitium-dns"
+file_paths = [
+    "docker-compose.yaml"
+]
+
+environment = """
+# Configuration directory
+CONFIG_DIR=[[CONFIG_DIR]]
+
+# Network and domain configuration
+DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
+
+# Port configuration
+PORT_TECHNITIUM_HTTP=[[PORT_TECHNITIUM_HTTP]]
+PORT_TECHNITIUM_HTTPS=[[PORT_TECHNITIUM_HTTPS]]
+
+# Application configuration
+TECHNITIUM_IMAGE=ghcr.io/goauthentik/server
+TECHNITIUM_TAG=latest
+
+# ADMIN_PASSWORD
+DNS_SERVER_ADMIN_PASSWORD=[[OP__KOMODO__TECHNITIUM__TECHNITIUM_DNS_ADMIN_PASSWORD]]
+
+DNS_SERVER_DOMAIN=blade-2018.lan
+"""
