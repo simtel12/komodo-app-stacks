@@ -4,7 +4,7 @@ services:
   dns-server:
     container_name: dns-server
     hostname: dns-server
-    image: ${TECHNITIUM_IMAGE:-ghcr.io/goauthentik/server}:${TECHNITIUM_TAG:-2026.2.3}
+    image: ${TECHNITIUM_IMAGE:-technitium/dns-server}:${TECHNITIUM_TAG:-latest}
     restart: unless-stopped
     # For DHCP deployments, use "host" network mode and remove all the port mappings, including the ports array by commenting them
     # network_mode: "host"
@@ -17,7 +17,7 @@ services:
     volumes:
       - config:/etc/dns
     labels:
-      - caddy=technitium.blade-2018.lan:443 dns-server.blade-2018.lan:443
+      - caddy=technitium.pi-rack-1.lan:443 dns-server.pi-rack-1.lan:443 dns-server.lan:443
       - caddy_ingress_network=container_bridge
       - caddy.reverse_proxy="{{upstreams 5380}}"
     env_file:

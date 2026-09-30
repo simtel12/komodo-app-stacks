@@ -1,9 +1,9 @@
 [[stack]]
 name = "technitium"
-tags = ["dns", "blade_2018"]
+tags = ["dns", "pi_rack_1"]
 
 [stack.config]
-server = "blade_2018"
+server = "pi_rack_1"
 poll_for_updates = true
 auto_update = true
 destroy_before_deploy = false
@@ -30,5 +30,5 @@ TECHNITIUM_TAG=latest
 # ADMIN_PASSWORD
 DNS_SERVER_ADMIN_PASSWORD=[[OP__KOMODO__TECHNITIUM__TECHNITIUM_DNS_ADMIN_PASSWORD]]
 
-DNS_SERVER_DOMAIN=blade-2018.lan
+DNS_SERVER_DOMAIN=dns-server.lan
 """
