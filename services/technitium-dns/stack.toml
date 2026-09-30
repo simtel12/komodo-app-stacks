@@ -23,10 +23,6 @@ CONFIG_DIR=[[CONFIG_DIR]]
 # Network and domain configuration
 DOMAIN=[[OP__KOMODO__COMMON__DOMAIN]]
 
-# Port configuration
-PORT_TECHNITIUM_HTTP=[[PORT_TECHNITIUM_HTTP]]
-PORT_TECHNITIUM_HTTPS=[[PORT_TECHNITIUM_HTTPS]]
-
 # Application configuration
 TECHNITIUM_IMAGE=ghcr.io/goauthentik/server
 TECHNITIUM_TAG=latest
