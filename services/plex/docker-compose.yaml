@@ -1,0 +1,65 @@
+name: "plex"
+
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    logging:
+      driver: ${LOGGING_DRIVER:-local}
+    volumes:
+      - samba_anime:/media/anime
+      - samba_movies:/media/movies
+      - samba_tv:/media/tv
+      - samba_education_videos:/media/education-videos
+      - samba_music_videos:/media/music-videos
+      - /media/plex/config:/config
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - VERSION=docker
+      # Only needed for first-time server claim; leave empty otherwise
+      - PLEX_CLAIM=${PLEX_CLAIM:-}
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  samba_anime:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/anime"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
+  samba_movies:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/movies"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
+  samba_tv:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/tv"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
+  samba_education_videos:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/education-videos"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
+  samba_music_videos:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/music-videos"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
