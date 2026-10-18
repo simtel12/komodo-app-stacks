@@ -1,0 +1,56 @@
+name: "metube"
+
+services:
+  metube:
+    image: ghcr.io/alexta69/metube:${METUBE_TAG:-latest}
+    container_name: metube
+    restart: unless-stopped
+    pull_policy: always
+    logging:
+      driver: ${LOGGING_DRIVER:-local}
+    ports:
+      - ${PORT_METUBE_HTTP}:8081
+    volumes:
+      - video:/downloads/video
+      - audio:/downloads/audio
+      - state:/state
+      - tmp:/tmp/metube
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DOWNLOAD_DIR=/downloads/video
+      - AUDIO_DOWNLOAD_DIR=/downloads/audio
+      # Keep queue/history and in-progress files off the network shares
+      - STATE_DIR=/state
+      - TEMP_DIR=/tmp/metube
+      # chown is not supported on CIFS; ownership is set by the mount options
+      - CHOWN_DIRS=false
+    labels:
+      - caddy=metube.lan:443 metube.blade-2016.lan
+      - caddy_ingress_network=container_bridge
+      - caddy.encode=gzip zstd
+      - caddy.reverse_proxy="{{upstreams 8081}}"
+    networks:
+      - container_bridge
+
+networks:
+  container_bridge:
+    external: true
+
+volumes:
+  state:
+  tmp:
+  video:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/${METUBE_VIDEO_SHARE}"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},vers=3.0,iocharset=utf8,uid=${PUID},gid=${PGID}"
+  audio:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/${METUBE_AUDIO_SHARE}"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},vers=3.0,iocharset=utf8,uid=${PUID},gid=${PGID}"

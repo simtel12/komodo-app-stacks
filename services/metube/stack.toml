@@ -1,0 +1,37 @@
+[[stack]]
+name = "metube"
+tags = ["media", "downloader", "blade_2016"]
+
+[stack.config]
+server = "blade_2016"
+poll_for_updates = true
+auto_update = true
+destroy_before_deploy = false
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+branch = "main"
+reclone = false
+file_paths = [
+    "services/metube/docker-compose.yaml",
+]
+
+environment = """
+# User and group configuration
+PUID=[[OP__KOMODO__COMMON__PUID]]
+PGID=[[OP__KOMODO__COMMON__PGID]]
+TZ=[[TZ]]
+
+# Logging configuration
+LOGGING_DRIVER=[[LOGGING_DRIVER]]
+
+# Application configuration
+METUBE_TAG=latest
+PORT_METUBE_HTTP=[[PORT_METUBE_HTTP]]
+
+# Storage configuration
+MEDIA_SMB_HOST=[[TRUENAS_SMB_HOST]]
+MEDIA_SMB_USERNAME=[[OP__KOMODO__COMMON__TRUENAS_SMB_USERNAME]]
+MEDIA_SMB_PASSWORD=[[OP__KOMODO__COMMON__TRUENAS_SMB_PASSWORD]]
+METUBE_VIDEO_SHARE=youtube-video
+METUBE_AUDIO_SHARE=youtube-audio
+"""

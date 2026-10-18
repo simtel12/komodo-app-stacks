@@ -262,3 +262,9 @@ name = "PORT_AUDIOBOOKSHELF_HTTP"
 description = "Audiobookshelf HTTP port"
 value = "13378"
 is_secret = false
+
+[[variable]]
+name = "PORT_METUBE_HTTP"
+description = "MeTube HTTP port"
+value = "8086"
+is_secret = false
