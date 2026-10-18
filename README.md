@@ -97,6 +97,15 @@ CONFIG_DIR=[[MY_CONFIG_DIR]]
 """
 ```
 
+## Host Notes
+
+### Plex GPU transcoding (`blade_2016`)
+
+The `plex` stack uses NVIDIA hardware transcoding. Docker passes the GPU through CDI (`/var/run/cdi/nvidia.yaml`), and the host uses the headless `-server` driver, so:
+
+- Install `libnvidia-decode-<branch>-server` and `libnvidia-encode-<branch>-server` on the host (they are not part of the headless driver). The compose file must request the `video` capability (`capabilities: [gpu, compute, video, utility]`).
+- The CDI spec is **not** refreshed automatically when those packages are installed or changed. If NVENC/NVDEC libraries are missing in the container (Plex logs `no hardware decode accelerator found`), run `sudo systemctl start nvidia-cdi-refresh.service`, check that `grep -cE 'nvcuvid|nvidia-encode' /var/run/cdi/nvidia.yaml` is non-zero, then recreate the container.
+
 ## Security
 
 - **No secrets in repository**: All secrets come from 1Password via komodo-op
