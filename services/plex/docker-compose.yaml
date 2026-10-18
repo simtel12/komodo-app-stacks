@@ -30,7 +30,8 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities: [gpu]
+              # "video" is required to inject libnvidia-encode / libnvcuvid (NVENC/NVDEC)
+              capabilities: [gpu, compute, video, utility]
 
 volumes:
   samba_anime:
