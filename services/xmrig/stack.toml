@@ -1,0 +1,30 @@
+[[stack]]
+name = "xmrig"
+tags = ["mining", "blade_2016"]
+
+[stack.config]
+server = "blade_2016"
+poll_for_updates = true
+auto_update = true
+destroy_before_deploy = false
+git_account = "simtel12"
+repo = "simtel12/komodo-app-stacks"
+branch = "main"
+reclone = false
+file_paths = [
+    "services/xmrig/docker-compose.yaml",
+]
+
+environment = """
+# Logging configuration
+LOGGING_DRIVER=[[LOGGING_DRIVER]]
+
+# Version tag
+XMRIG_TAG=latest
+
+# Pool configuration
+XMRIG_POOL_URL=10.0.0.30:3333
+XMRIG_POOL_USER=[[OP__KOMODO__XMRIG__POOL_USER]]
+XMRIG_POOL_PASS=[[OP__KOMODO__XMRIG__POOL_PASS]]
+XMRIG_ACCESS_TOKEN=[[OP__KOMODO__XMRIG__ACCESS_TOKEN]]
+"""
