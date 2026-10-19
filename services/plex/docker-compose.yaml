@@ -13,6 +13,8 @@ services:
       - samba_tv:/media/tv
       - samba_education_videos:/media/education-videos
       - samba_music_videos:/media/music-videos
+      - samba_youtube_video:/media/youtube-video
+      - samba_youtube_audio:/media/youtube-audio
       - /media/plex/config:/config
     devices:
       - /dev/dri:/dev/dri
@@ -63,4 +65,16 @@ volumes:
     driver_opts:
       type: cifs
       device: "//${MEDIA_SMB_HOST}/music-videos"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
+  samba_youtube_video:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/youtube-video"
+      o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
+  samba_youtube_audio:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: "//${MEDIA_SMB_HOST}/youtube-audio"
       o: "username=${MEDIA_SMB_USERNAME},password=${MEDIA_SMB_PASSWORD},iocharset=utf8,uid=${PUID},gid=${PGID}"
