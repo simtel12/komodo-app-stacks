@@ -25,8 +25,6 @@ services:
       # Keep queue/history and in-progress files off the network shares
       - STATE_DIR=/state
       - TEMP_DIR=/tmp/metube
-      # chown is not supported on CIFS; ownership is set by the mount options
-      - CHOWN_DIRS=false
     labels:
       - caddy=metube.lan:443 metube.blade-2016.lan
       - caddy_ingress_network=container_bridge
